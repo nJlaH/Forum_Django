@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{{article_from_certain_article.Article_publication}}{% endblock %}
+
+{% block content %}
+
+
+    <h2>{{article_from_certain_article.Article_title}}</h2>
+
+    {% if article_from_certain_article.was_published_recently %}
+        <u>NEW (was written within last 3 days)</u>
+    {% endif %}
+
+    <p>{{article_from_certain_article.Article_text}}</p>
+    <em>{{article_from_certain_article.Article_publication}}</em>
+
+    </br></br></br></br>
+
+    {% if comments_number %}
+        Comments ({{comments_number}}):</br></br>
+    {% endif %}
+
+    {% if comments_list %}
+        {% for c in comments_list %}
+            <b>{{c.Comment_author}}</b></br>
+            {{c.Comment_text}}</br></br>
+        {% endfor %}
+    {% else %}
+        No comments still
+    {% endif %}
+
+    </b></br></br></br></br>
+
+    <form action="{% url 'mainapp:add_comment' article_from_certain_article.id %}" method="POST">
+        {% csrf_token %}
+        <input type="text" required placeholder="Your name" name="comment_author"></br></br>
+        <input type="text" required placeholder="Your comment" name="comment_text"></br></br>
+        <button type="submit">Send</button>
+    </form>
+
+    </b></br></br></br>
+
+    <a href="{% url 'mainapp:index' %}">Back</a>
+
+
+{% endblock %}

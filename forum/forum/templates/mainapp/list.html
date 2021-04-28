@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Title from list.html{% endblock %}
+
+{% block content %}
+
+    {% if articles %}
+        <h2>List of articles:</h2></br>
+        {% for a in articles %}
+            <b>{{ a.id }})</b>
+            <i>{{ a.Article_title }}</i></br>
+            <i><a href="{% url 'mainapp:certain_article' a.id %}">{{a.Article_title}}</a></i></br></br>
+        {% endfor %}
+    {% endif %}
+
+    </b></br></br></br></br>
+
+    <form action="{% url 'mainapp:add_article' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" required placeholder="Title of your article" name="article_title"></br></br>
+        <textarea required placeholder="Text of your article" name="article_text"></textarea></br></br>
+        <button type="submit">Send</button>
+    </form>
+
+    </b></br></br></br>
+
+
+{% endblock %}
