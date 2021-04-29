@@ -9,8 +9,8 @@
         <h2>List of articles:</h2></br>
         {% for a in articles %}
             <b>{{ a.id }})</b>
-            <i>{{ a.Article_title }}</i></br>
-            <i><a href="{% url 'mainapp:certain_article' a.id %}">{{a.Article_title}}</a></i></br></br>
+            <i>{{ a.title }}</i></br>
+            <i><a href="{% url 'mainapp:certain_article' a.id %}">{{a.title}}</a></i></br></br>
         {% endfor %}
     {% endif %}
 
